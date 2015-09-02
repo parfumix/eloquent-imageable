@@ -3,14 +3,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttachementsTable extends Migration {
+class CreateAttachmentsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('attachements', function(Blueprint $table) {
+        Schema::create('attachments', function(Blueprint $table) {
             $table->integer('imageable_id');
             $table->string('imageable_type');
             $table->string('title');
