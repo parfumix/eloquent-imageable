@@ -15,6 +15,7 @@ class CreateAttachmentsTable extends Migration {
             $table->string('imageable_type');
             $table->string('title');
             $table->string('path');
+            $table->string('full_path');
             $table->string('extension');
             $table->timestamps();
         });

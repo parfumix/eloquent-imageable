@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attachment extends Model {
 
-    public $table = 'attachemnts';
+    public $table = 'attachments';
 
-    public $fillable = ['*'];
+    protected $fillable = ['imageable_id', 'imageable_type', 'title', 'path', 'full_path', 'extension'];
 }
