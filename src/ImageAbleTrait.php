@@ -52,19 +52,13 @@ trait ImageAbleTrait {
      * @param callable $callback
      * @return mixed
      */
-    public function images(array $attributes = array(), \Closure $callback = null) {
-        if( $class = $this->getAttribute('imageAbleClass') )
-            $sql = $class::where(str_singular($this->getTable()) . '_id' , $this->id);
-         else
-            $sql = $class::where('imageable_id' , $this->id)
-                ->where('imageable_type', $this->getMorhpClass());
-
-        if( !is_null($callback) )
-            $sql = $callback($sql, $this);
+    public function images(array $attributes = array()) {
+        $sql = ($class = $this->getAttribute('imageAbleClass')) ? $class::hasMany($class) : $this->morphMany(Attachment::class, 'imageable');
 
         foreach ($attributes as $key => $attribute)
             $sql->where($key, $attributes);
 
-        return $sql->get();
+        return $sql;
     }
+
 }

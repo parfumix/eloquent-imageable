@@ -16,9 +16,8 @@ interface ImageAble {
      * Get all images by specific attributes .
      *
      * @param array $attributes
-     * @param callable $callback
      * @return mixed
      */
-    public function images(array $attributes = array(), \Closure $callback = null);
+    public function images(array $attributes = array());
 
 }
