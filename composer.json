@@ -1,8 +1,8 @@
 {
-    "name": "parfumix/laravel-imageable",
-    "description": "Laravel imageable, upload images",
+    "name": "parfumix/eloquent-imageable",
+    "description": "Eloquent imageable, upload images",
     "keywords": ["eloquent", "image", "laravel", "php"],
-    "homepage": "https://github.com/parfumix/laravel-imageable",
+    "homepage": "https://github.com/parfumix/eloquent-imageable",
     "license": "MIT",
     "authors": [
         {
