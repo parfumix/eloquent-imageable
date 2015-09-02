@@ -8,4 +8,5 @@ class Attachment extends Model {
 
     public $table = 'attachemnts';
 
+    public $fillable = ['*'];
 }
