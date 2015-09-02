@@ -15,31 +15,30 @@ trait ImageAbleTrait {
     public function upload(array $images = array(), $path = null, array $filters = array()) {
         $imageProcessor = app('image-processor');
 
-        $paths = $imageProcessor->upload(
+        $images = $imageProcessor->upload(
             $images, $path, $filters
         );
 
         $attachments = [];
-        array_walk($paths, function($path) use( & $attachments) {
+        array_walk($images, function($image) use( & $attachments) {
 
             if( $class = $this->getAttribute('imageAbleClass') ) {
 
                 $attachments[] = (new $class)->fill([
                     str_singular($this->getTable()) . '_id' => $this->id,
-                    'title' => 'title',
-                    'path' => $path,
+                    'title' => $image->basename,
+                    'full_path' => $image->basePath(),
                 ])->save();
 
             } else {
-
-                $attachments[] =Attachment::create([
+                $attachments[] = Attachment::create([
                     'imageable_id' => $this->id,
-                    'imageable_type' => $this->getMorhpClass(),
-                    'title' => 'title',
-                    'path' => $path,
-                    'extension' => 'jpeg',
+                    'imageable_type' => $this->getMorphClass(),
+                    'title' => $image->basename,
+                    'path' => $image->relative_path,
+                    'full_path' => $image->basePath(),
+                    'extension' => $image->extension,
                 ]);
-
             }
         });
 
