@@ -5,18 +5,25 @@ namespace Eloquent\ImageAble;
 trait ImageAbleTrait {
 
     /**
+     * @var
+     */
+    #protected $imageAbleClass = Attachment::class;
+
+    /**
      * Upload images .
      *
      * @param array $images
      * @param null $path
      * @param array $filters
+     * @param null $placeholder
+     * @param callable $closure
      * @return mixed
      */
-    public function upload(array $images = array(), $path = null, array $filters = array()) {
+    public function upload(array $images = array(), $path = null, array $filters = array(), $placeholder = null, \Closure $closure = null) {
         $imageProcessor = app('image-processor');
 
         $images = $imageProcessor->upload(
-            $images, $path, $filters
+            $images, $path, $filters, $placeholder, $closure
         );
 
         $attachments = [];
@@ -49,8 +56,8 @@ trait ImageAbleTrait {
      * Get all images by specific attributes .
      *
      * @param array $attributes
-     * @param callable $callback
      * @return mixed
+     * @internal param callable $callback
      */
     public function images(array $attributes = array()) {
         $sql = ($class = $this->getAttribute('imageAbleClass')) ? $class::hasMany($class) : $this->morphMany(Attachment::class, 'imageable');
