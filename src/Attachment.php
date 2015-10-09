@@ -12,7 +12,7 @@ class Attachment extends Model implements Sortable {
 
     public $table = 'attachments';
 
-    protected $fillable = ['position', 'imageable_id', 'imageable_type', 'title', 'path', 'full_path', 'extension'];
+    protected $fillable = ['is_main', 'position', 'imageable_id', 'imageable_type', 'title', 'path', 'full_path', 'extension'];
 
     public function imageable() {
         return $this->morphTo();
@@ -25,5 +25,14 @@ class Attachment extends Model implements Sortable {
      */
     public function isMain() {
         return $this->is_main;
+    }
+
+    /**
+     * Set attachemnt as main .
+     *
+     */
+    public function setMain() {
+        $this->is_main = 1;
+        $this->save();
     }
 }
