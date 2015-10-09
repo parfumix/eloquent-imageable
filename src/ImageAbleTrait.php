@@ -2,12 +2,9 @@
 
 namespace Eloquent\ImageAble;
 
-trait ImageAbleTrait {
+use Flysap\Support;
 
-    /**
-     * @var
-     */
-    #protected $imageAbleClass = Attachment::class;
+trait ImageAbleTrait {
 
     /**
      * Upload images .
@@ -50,6 +47,26 @@ trait ImageAbleTrait {
         });
 
         return $attachments;
+    }
+
+    /**
+     * Delete image by id
+     *
+     * @param $imageIds
+     */
+    public function deleteImage($imageIds) {
+        if(! is_array($imageIds))
+            $imageIds = (array)$imageIds;
+
+        $images = $this->images()
+            ->whereIn('id', $imageIds);
+
+        array_walk($images, function($image) {
+            if( Support\is_path_exists($image->fullpath) )
+                Support\remove_paths($image->fullpath);
+
+            $image->delete();
+        });
     }
 
     /**
