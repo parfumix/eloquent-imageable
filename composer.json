@@ -15,10 +15,20 @@
         {
           "type": "git",
           "url" : "git@github.com:parfumix/laravel-image-uploader.git"
+        },
+        {
+          "type": "git",
+          "url" : "git@github.com:parfumix/eloquent-sortable.git"
+        },
+        {
+          "type": "git",
+          "url" : "git@github.com:flysap/support.git"
         }
     ],
     "require": {
+        "flysap/support": "dev-master",
         "parfumix/laravel-image-uploader": "dev-master",
+        "parfumix/eloquent-sortable": "dev-master",
         "php": ">=5.4.0",
         "laravel/framework": "~5.0"
     },
