@@ -85,4 +85,15 @@ trait ImageAbleTrait {
         return $sql;
     }
 
+    /**
+     * Get image class .
+     *
+     * @return mixed
+     */
+    public function imageClass() {
+        if(! $class = $this->getAttribute('imageAbleClass'))
+            $class = Attachment::class;
+
+        return $class;
+    }
 }
