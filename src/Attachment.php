@@ -17,4 +17,13 @@ class Attachment extends Model implements Sortable {
     public function imageable() {
         return $this->morphTo();
     }
+
+    /**
+     * Check if image is main .
+     *
+     * @return mixed
+     */
+    public function isMain() {
+        return $this->is_main;
+    }
 }
