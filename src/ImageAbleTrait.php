@@ -100,20 +100,25 @@ trait ImageAbleTrait {
      * Delete image by id
      *
      * @param $imageIds
+     * @throws PermissionException
      */
     public function deleteImage($imageIds) {
-        if(! is_array($imageIds))
-            $imageIds = (array)$imageIds;
+        if( Support\isAllowed(isset($behaviors['roles']) ? $behaviors['roles'] : [], isset($behaviors['permissions']) ? $behaviors['permissions'] : []) ) {
+            if(! is_array($imageIds))
+                $imageIds = (array)$imageIds;
 
-        $images = $this->images()
-            ->whereIn('id', $imageIds);
+            $images = $this->images()
+                ->whereIn('id', $imageIds);
 
-        array_walk($images, function($image) {
-            if( Support\is_path_exists($image->fullpath) )
-                Support\remove_paths($image->fullpath);
+            array_walk($images, function($image) {
+                if( Support\is_path_exists($image->fullpath) )
+                    Support\remove_paths($image->fullpath);
 
-            $image->delete();
-        });
+                $image->delete();
+            });
+        }
+
+        throw new PermissionException('Have no access for delete.');
     }
 
     /**
