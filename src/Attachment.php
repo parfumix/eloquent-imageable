@@ -14,8 +14,20 @@ class Attachment extends Model implements Sortable {
 
     protected $fillable = ['is_main', 'position', 'imageable_id', 'imageable_type', 'title', 'path', 'full_path', 'extension'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
     public function imageable() {
         return $this->morphTo();
+    }
+
+    /**
+     * Get attachment presenter .
+     *
+     * @return AttachmentPresenter
+     */
+    public function present() {
+        return new AttachmentPresenter($this);
     }
 
     /**

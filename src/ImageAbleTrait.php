@@ -60,7 +60,6 @@ trait ImageAbleTrait {
                 $placeholder = str_replace('%'.$key.'%', $value, $placeholder);
         }
 
-
         /** Check for permissions if current user can upload images  */
         if( Support\isAllowed(isset($behaviors['roles']) ? $behaviors['roles'] : [], isset($behaviors['permissions']) ? $behaviors['permissions'] : []) ) {
             $images = $imageProcessor->upload(
@@ -126,7 +125,6 @@ trait ImageAbleTrait {
      *
      * @param array $attributes
      * @return mixed
-     * @internal param callable $callback
      */
     public function images(array $attributes = array()) {
         $sql = ($class = $this->getAttribute('imageAbleClass')) ? $class::hasMany($class) : $this->morphMany(Attachment::class, 'imageable');
